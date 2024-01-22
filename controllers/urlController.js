@@ -6,14 +6,20 @@ async function handleGenerateNewShortUrl(req, res) {
     if (!url) {
         return res.status(400).json({ error: 'URL is required' });
     }
-    const shortId = nanoid(8);
+    let shortId = nanoid(8);
     // console.log(shortId);
-    const response = await Url.create({
-        shortId: shortId,
-        redirectedUrl: url,
-        visitedHistory: [],
-
-    });
+    const exists = await Url.findOne({ redirectedUrl: url });
+    let response;
+    if (exists) {
+        response = exists;
+        shortId = exists.shortId;
+    } else {
+        response = await Url.create({
+            shortId: shortId,
+            redirectedUrl: url,
+            visitedHistory: [],
+        });
+    }
     return res.render('home', { shortId: shortId });
     return res.status(201).json(response);
 }
