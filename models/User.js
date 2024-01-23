@@ -21,12 +21,13 @@ const userSchema = new Schema({
         trim: true,
         minlength: 6,
     },
-    // generatedUrls: [
-    //     {
-    //         type: Schema.Types.ObjectId,
-    //         ref: 'Url',
-    //     }
-    // ]
+    generatedUrls: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Url',
+            
+        }
+    ]
 }, { timestamps: true });
 
 const User = model('User', userSchema);

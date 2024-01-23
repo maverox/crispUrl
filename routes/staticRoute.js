@@ -1,9 +1,16 @@
 const express = require('express');
+const Url = require('../models/Url');
 const router = express.Router();
 
 // Serve static files from the "views/home" directory on the root path ("/")
-router.get('/', (req, res) => {
-    return res.render('home');
+router.get('/', async (req, res) => {
+    if (!req.user) {
+        return res.redirect('/login');
+    }
+    const allUrls = await Url.find({createdBy: req.user._id})
+    .populate('createdBy', 'username');
+    console.log(allUrls);
+    return res.render('home', {urls: allUrls});
 })
 
 // Serve static files from the "views/signup" directory on the "/signup" path

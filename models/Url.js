@@ -14,7 +14,10 @@ const urlSchema = new Schema({
     visitHistory: [
         { timestamp: { type: Date, default: Date.now } }
     ],
-
+    createdBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
 
 },
     { timestamps: true });

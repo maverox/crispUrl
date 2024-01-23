@@ -18,6 +18,7 @@ async function handleGenerateNewShortUrl(req, res) {
             shortId: shortId,
             redirectedUrl: url,
             visitedHistory: [],
+            createdBy: req.user._id,
         });
     }
     return res.render('home', { shortId: shortId });
@@ -45,7 +46,8 @@ async function handleGetAnalytics(req, res) {
         language: req.headers['accept-language'],
         platform: req.headers['user-platform'],
         clickCount: url.visitHistory.length,
-        clickHistory: url.visitHistory.map((visit) => visit.timestamp.toISOString().split('T')[0])
+        clickHistory: url.visitHistory.map((visit) => visit.timestamp.toISOString().split('T')[0]),
+        createdBy: url.createdBy,
     }
     return res.json(
         analytics
