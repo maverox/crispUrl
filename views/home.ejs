@@ -15,13 +15,25 @@
             flex-direction: column;
             justify-content: space-between;
             height: 100vh;
-        }
+			--gray-base: #151618;
+			--gray-tint-10: #2c2d2f;
+			--gray-tint-20: #444546;
+			--gray-tint-40: #737374;
+			--gray-tint-10: #2c2d2f;
+			--gray-tint-10: #2c2d2f;
+
+			--accent-base: #2FA2BD;
+			--accent-tint-90: #EAF6F8;
+
+			--contextual-success-base: #1FA47C;
+		}
+        
         .container {
             display: flex;
             justify-content: center;
             flex-direction: column;
             align-items: center;
-            background-color: #253444;
+            background-color: var(--gray-tint-10);
             min-height: 90vh;
         }
         .form {
@@ -34,7 +46,7 @@
             height: fit-content;
             font-size: large;
             font-weight: 900;
-            color: #ffdada;
+            color: var(--accent-tint-90);
         }
         .form-input {
             width: 300px;
@@ -48,19 +60,19 @@
         }
         .form-button {
             padding: 10px 20px;
-            background-color: #007bff;
+            background-color: var(--contextual-success-base);
             height: auto;
-            color: #fff;
+            color: var(--accent-tint-90);
             border: none;
             font-size: large;
             border-radius: 5px;
             cursor: pointer;
         }
         .form-input:focus-visible {
-            outline: #007bff solid 3px;
+            outline: var(--contextual-success-base) solid 3px;
         }
         a{
-            color: #ffdada;
+            color: var(--contextual-success-base);
             text-decoration: none;
             transition: color 0.7s ease-in-out;
         }
@@ -68,7 +80,7 @@
             color: #ff3c00
         } */
         a:hover {
-            color: #007bff;
+            color: var(--accent-base);
         }
     </style>
 </head>
@@ -85,7 +97,7 @@
         <% if (locals.shortId) { %>
             <div style="font-size: medium; color: lightblue;">
                 <% if (locals.shortId) { %>
-                   <h2>Here's your crisp Link:  <a href="http://<%= process.env.HOST%>:<%= process.env.PORT %>/<%= locals.shortId %>"><%= locals.shortId %></a></h2>
+                   <h2>Here's your crisp Link:  <a href="http://<%= process.env.HOST%>:<%= process.env.PORT %>/url/<%= locals.shortId %>"><%= locals.shortId %></a></h2>
                 <% } %>
                 
             </div>

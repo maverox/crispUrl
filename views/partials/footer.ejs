@@ -1,6 +1,19 @@
 <style>
+    :root {
+			--gray-base: #151618;
+			--gray-tint-10: #2c2d2f;
+			--gray-tint-20: #444546;
+			--gray-tint-40: #737374;
+			--gray-tint-10: #2c2d2f;
+			--gray-tint-10: #2c2d2f;
+
+			--accent-base: #2FA2BD;
+			--accent-tint-90: #EAF6F8;
+
+			--contextual-success-base: #1FA47C;
+		}
     .mdc-footer {
-        background-color: #f5f5f5;
+        background-color:   var(--gray-tint-40);
         padding: 10px;
         text-align: center;
         margin-bottom: 0px;
@@ -16,13 +29,13 @@
 
     .mdc-footer__copyright {
         font-size: 12px;
-        color: #888;
+        color: var(--accent-base);
     }
 
     .mdc-footer__site-name {
         font-size: 16px;
         font-weight: bold;
-        color: #333;
+        color: var(--gray-tint-10);
         margin-left: 10px;
     }
 </style>
