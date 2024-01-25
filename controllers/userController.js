@@ -14,9 +14,11 @@ async function   handleRegisterUser (req, res) {
         email,
         password,
     })
-    const sessionId = nanoid(20);
-    setUser(sessionId, newField);
-    res.cookie('sid', sessionId);
+    // const sessionId = nanoid(20);
+    // setUser(sessionId, newField);
+    // res.cookie('sid', sessionId);
+    const token = setUser(newField);
+    res.cookie('sid', token);
     return res.redirect('/');
     // return res.status(201).json(newField);
 }
@@ -29,9 +31,11 @@ async function handleLoginUser(req, res) {
     if (!userExists) {
         return res.render('signup',{error: 'Username does not exist'});
     }
-    const sessionId = nanoid(20);
-    setUser(sessionId, userExists);
-    res.cookie('sid', sessionId);
+    // const sessionId = nanoid(20);
+    // setUser(sessionId, userExists);
+    // res.cookie('sid', sessionId);
+    const token = setUser(userExists);
+    res.cookie('sid', token);
     return res.redirect('/');
 }
 
