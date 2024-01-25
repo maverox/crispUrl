@@ -18,7 +18,8 @@ async function   handleRegisterUser (req, res) {
     // setUser(sessionId, newField);
     // res.cookie('sid', sessionId);
     const token = setUser(newField);
-    res.cookie('sid', token);
+    // res.cookie('sid', token);
+    res.json({token});
     return res.redirect('/');
     // return res.status(201).json(newField);
 }
@@ -35,7 +36,8 @@ async function handleLoginUser(req, res) {
     // setUser(sessionId, userExists);
     // res.cookie('sid', sessionId);
     const token = setUser(userExists);
-    res.cookie('sid', token);
+    // res.cookie('sid', token);
+    res.json({token});
     return res.redirect('/');
 }
 
