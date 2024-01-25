@@ -1,19 +1,39 @@
-const sessionIdToUser = new Map();
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+const SECRET = process.env.SECRET;
 
-const setUser = (sessionId, user) => {
-    return sessionIdToUser.set(sessionId, user);
+
+const setUser = (user) => {
+    
+    try {
+        const token = jwt.sign(user.toJSON(), SECRET, { expiresIn: '3h' });
+        return token;
+    } catch (error) {
+        console.log(`Cant sign jwt token: ${error}`);
+    }
 }
 
-const getUser = (sessionId) => {
-    return sessionIdToUser.get(sessionId);
+const getUser = (token) => {
+    try {
+        return jwt.verify(token, SECRET);
+    } catch (error) {
+        console.log(`Cant verify jwt token: ${error}`);
+    }
 }
 
-const deleteUser = (sessionId) => {
-    sessionIdToUser.delete(sessionId);
-}
 
 module.exports = {
     setUser,
     getUser,
-    deleteUser,
+    
 }
+// const sessionIdToUser = new Map();
+
+// const setUser = (sessionId, user) => {
+//     return sessionIdToUser.set(sessionId, user);
+// }
+
+// const getUser = (sessionId) => {
+//     return sessionIdToUser.get(sessionId);
+// }
+
