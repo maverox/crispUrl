@@ -22,6 +22,11 @@ const userSchema = new Schema({
         trim: true,
         minlength: 6,
     },
+    role: {
+        type: String,
+        default: 'user',
+        required: true,
+    },
     generatedUrls: [
         {
             type: Schema.Types.ObjectId,

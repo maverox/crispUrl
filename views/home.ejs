@@ -138,8 +138,8 @@
                         <td><%= index + 1 %></td>
                         <td><a href="/url/<%= url.shortId %>"><%= url.shortId %></a></td>
                         <td><a href="<%= url.redirectedUrl %>"><%= url.redirectedUrl %></a></td>
-                        <td><%= url.visitHistory.length %></td>
-                        <td><%= url.createdBy.username %></td>
+                        <td><%= url?.visitHistory.length %></td>
+                        <td><%= url?.createdBy?.username %></td>
                     </tr>
                     <% }) %>
                 </tbody>

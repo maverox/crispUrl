@@ -4,15 +4,15 @@ dotenv = require('dotenv');
 const userRoute = require('./routes/userRoute');
 const urlRoute = require('./routes/urlRoute');
 const staticRoute = require('./routes/staticRoute');
-const cors  = require('cors');
+const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 8001;
 const HOST = process.env.HOST || 'localhost';
 const { connectDB } = require('./connect');
-const { handleClickandRedirect } = require('./controllers/urlController');
+// const { handleClickandRedirect } = require('./controllers/urlController');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const { restrictToLoggedUserOnly, checkAuth } = require('./middlewares/auth');
+const { checkForAuthentication, restricToRole } = require('./middlewares/auth');
 app.set('view engine', 'ejs');
 app.set('views', path.resolve('./views'));
 dotenv.config({
@@ -31,9 +31,10 @@ app.use(cors(
         credentials: true,
     }
 ))
+app.use(checkForAuthentication);
 
-app.use('/', checkAuth, staticRoute);
-app.use('/url', restrictToLoggedUserOnly, urlRoute);
+app.use('/', staticRoute);
+app.use('/url', restricToRole(['admin', 'user']), urlRoute);
 app.use('/user', userRoute);
 // static routes
 

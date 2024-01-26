@@ -19,8 +19,8 @@ async function   handleRegisterUser (req, res) {
     // setUser(sessionId, newField);
     // res.cookie('sid', sessionId);
     const token = setUser(newField);
-    // res.cookie('sid', token);
-    res.json({token});
+    res.cookie('sid', token);
+    // res.json({token});
     return res.redirect('/');
     // return res.status(201).json(newField);
 }
@@ -34,15 +34,18 @@ async function handleLoginUser(req, res) {
 
     if (!userExists) {
         return res.render('signup',{error: 'Username does not exist'});
-    } else if (await bcrypt.compare(userExists.password, password)) { 
-        return res.render('signup', {error: 'Password is incorrect'});
+    } 
+    const isPasswordCorrect = await bcrypt.compare(password, userExists.password);
+    if (!isPasswordCorrect) {
+        return res.render('signup',{error: 'Password is incorrect'});
     }
+
     // const sessionId = nanoid(20);
     // setUser(sessionId, userExists);
     // res.cookie('sid', sessionId);
     const token = setUser(userExists);
-    // res.cookie('sid', token);
-    res.json({token});
+    res.cookie('sid', token);
+    // res.json({token});
     return res.redirect('/');
 }
 

@@ -6,7 +6,8 @@ const SECRET = process.env.SECRET;
 const setUser = (user) => {
     
     try {
-        const token = jwt.sign(user.toJSON(), SECRET, { expiresIn: '3h' });
+        const { _id, username, email, role } = user;
+        const token = jwt.sign({ _id, username, email, role }, SECRET, { expiresIn: '3h' });
         return token;
     } catch (error) {
         console.log(`Cant sign jwt token: ${error}`);
